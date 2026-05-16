@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import ProductViewer from "./components/ProductViewer";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
+import Showcase from "./components/Showcase";
 
 // we have to make plugin our gsap manually to make it globally accessibly
 gsap.registerPlugin(ScrollTrigger);
@@ -13,6 +14,7 @@ const App = () => {
       <NavBar />
       <Hero />
       <ProductViewer />
+      <Showcase />
     </main>
   );
 };

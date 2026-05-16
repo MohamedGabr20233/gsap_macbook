@@ -25,13 +25,7 @@
 }
 
 :root {
-  --gradient-color: linear-gradient(
-    to bottom right,
-    #0894ff 0%,
-    #c959dd 34%,
-    #ff2e54 68%,
-    #ff9004
-  );
+  --gradient-color: linear-gradient(to bottom right, #0894ff 0%, #c959dd 34%, #ff2e54 68%, #ff9004);
 }
 
 @theme {
@@ -354,26 +348,14 @@ body {
             z-index: -1;
             margin: -5px; /* !important */
             border-radius: 24px; /* !important */
-            background: linear-gradient(
-              91deg,
-              #0096ff 0%,
-              #bb64ff 42%,
-              #f2416b 74%,
-              #eb7500 100%
-            );
+            background: linear-gradient(91deg, #0096ff 0%, #bb64ff 42%, #f2416b 74%, #eb7500 100%);
           }
 
           p {
             @apply font-semibold lg:text-2xl 2xl:text-3xl;
 
             span {
-              background: linear-gradient(
-                91deg,
-                #0096ff 0%,
-                #bb64ff 42%,
-                #f2416b 74%,
-                #eb7500 100%
-              );
+              background: linear-gradient(91deg, #0096ff 0%, #bb64ff 42%, #f2416b 74%, #eb7500 100%);
               background-clip: text;
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
