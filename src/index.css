@@ -170,7 +170,7 @@ body {
     }
 
     #canvas {
-      @apply !w-full !h-[80vh]  lg:!h-dvh relative z-40;
+      @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
     }
   }
 
@@ -178,14 +178,14 @@ body {
     @apply relative;
 
     .media {
-      @apply relative lg:overflow-hidden;
+      @apply relative flex justify-center lg:overflow-hidden;
 
       video {
-        @apply w-full object-cover object-center;
+        @apply w-full 2xl:max-w-425 aspect-auto object-contain object-bottom;
       }
 
       .mask {
-        @apply absolute h-full top-0 lg:-top-20 xl:top-0;
+        @apply absolute h-full top-0 lg:-top-20 2xl:-top-40 2xl:h-[110%];
 
         img {
           @apply h-full scale-150 lg:scale-100;
@@ -201,7 +201,7 @@ body {
     }
 
     .content {
-      @apply relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0;
+      @apply relative z-10 my-5 lg:-mt-40 2xl:-mt-60 bg-black font-semibold text-xl text-dark-100 lg:opacity-0;
 
       .wrapper {
         @apply container mx-auto px-5 pb-20 2xl:px-0 flex flex-col lg:flex-row justify-center gap-20;

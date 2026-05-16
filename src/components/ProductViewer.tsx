@@ -17,9 +17,10 @@ const ProductViewer = () => {
       <h2>Take a closer look.</h2>
 
       <div className="controls">
-        <p className="info">
+        {/* <p className="info">
           MacBookPro {scale === 0.06 ? '14"' : '16"'} in {color === "#adb5bd" ? "Silver" : "Space Black"}
-        </p>
+        </p> */}
+
         <div className="flex-center gap-5 mt-5">
           <div className="color-control">
             <div onClick={() => setColor("#adb5bd")} className={clsx("bg-neutral-300", color === "#adb5bd" && "active")} />
@@ -47,7 +48,7 @@ const ProductViewer = () => {
         </div>
       </div>
 
-      <p className="text-white text-4xl">Render Canvas </p>
+      {/* <p className="text-white text-4xl">Render Canvas </p> */}
 
       <Canvas
         id="canvas"
