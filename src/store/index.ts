@@ -1,26 +1,25 @@
-import {create } from "zustand"
+import { create } from "zustand";
 
-type MackBookStore ={
-    color: string,
-    setColor: (color: string) => void
+type MackBookStore = {
+  color: string;
+  setColor: (color: string) => void;
 
-    scale: number,
-    setScale: (scale: number) => void
+  scale: number;
+  setScale: (scale: number) => void;
 
-    reset: () => void
-}
+  reset: () => void;
+};
 
-const useMacBookStore = create<MackBookStore>((set)=>({
+const useMacBookStore = create<MackBookStore>((set) => ({
+  color: "#2e2c2e",
+  setColor: (color) => set({ color }),
 
-    color: "#adb5bd",
-    setColor:(color)=> set({color}),
+  scale: 0.08,
+  setScale: (scale) => set({ scale }),
 
-    scale : 0.08,
-    setScale:(scale)=>set({scale}),
+  // reset
 
-    // reset
-    
-    reset:()=> set({color:"#2e2c2e",scale:0.08})
-}))
+  reset: () => set({ color: "#2e2c2e", scale: 0.08 }),
+}));
 
-export default useMacBookStore
+export default useMacBookStore;
