@@ -8,22 +8,25 @@ import Performance from "./components/Performance";
 import Highlight from "./components/Highlight";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
+import LoadingPage from "./components/LoadingPage";
 
 // we have to make plugin our gsap manually to make it globally accessibly
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
   return (
-    <main>
-      <NavBar />
-      <Hero />
-      <ProductViewer />
-      <Showcase />
-      <Performance />
-      <Highlight />
-      <Features />
-      <Footer />
-    </main>
+    <LoadingPage>
+      <main>
+        <NavBar />
+        <Hero />
+        <ProductViewer />
+        <Showcase />
+        <Performance />
+        <Features />
+        <Highlight />
+        <Footer />
+      </main>
+    </LoadingPage>
   );
 };
 

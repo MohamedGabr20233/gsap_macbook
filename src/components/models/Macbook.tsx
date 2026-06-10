@@ -8,11 +8,12 @@ Title: macbook pro M3 16 inch 2024
 */
 
 import * as THREE from "three";
-import { useGLTF, useTexture } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import type { GLTF } from "three-stdlib";
 import useMacBookStore from "../../store";
 import { useEffect } from "react";
 import { noChangeParts } from "../../constants";
+import { getVideoTexture } from "../../utils/videoTextureCache";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -61,10 +62,15 @@ type GLTFResult = GLTF & {
 };
 
 export default function MacbookModel(props: React.ComponentProps<"group">) {
-  const { nodes, materials, scene } = useGLTF("/models/macbook.glb") as unknown as GLTFResult;
-  const texture = useTexture("/screen.png");
+  const { color, texture } = useMacBookStore();
 
-  const { color } = useMacBookStore();
+  const { nodes, materials, scene } = useGLTF("/models/macbook.glb") as unknown as GLTFResult;
+
+  // Instead of useVideoTexture (which triggers Suspense and creates a new
+  // video element every time texture changes), we grab the pre-loaded
+  // VideoTexture from the cache. This is instant — no loading, no flash.
+  const screen = getVideoTexture(texture);
+
   useEffect(() => {
     scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -95,7 +101,7 @@ export default function MacbookModel(props: React.ComponentProps<"group">) {
       <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_123.geometry} material={materials.sfCQkHOWyrsLmor} rotation={[Math.PI / 2, 0, 0]}>
-        <meshBasicMaterial map={texture} />
+        <meshBasicMaterial map={screen} />
       </mesh>
       <mesh geometry={nodes.Object_127.geometry} material={materials.ZCDwChwkbBfITSW} rotation={[Math.PI / 2, 0, 0]} />
     </group>
