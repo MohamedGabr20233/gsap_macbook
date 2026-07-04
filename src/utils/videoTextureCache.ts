@@ -21,7 +21,6 @@ function preloadOne(src: string): Promise<void> {
     video.playsInline = true;
     video.preload = "auto";
     video.loop = true;
-    video.load();
 
     // Wrap the <video> element in a Three.js VideoTexture so it can be
     // used as a material on a 3D model's screen
@@ -30,16 +29,27 @@ function preloadOne(src: string): Promise<void> {
     // Store in cache so other components can find it later
     cache.set(src, texture);
 
-    // When the video has loaded enough to play, start playing it
-    // This way, by the time the user scrolls to Features, all videos
-    // are already playing in the background
-    video.oncanplaythrough = () => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeoutId);
       video.play().catch(() => {});
       resolve();
     };
 
+    const timeoutId = window.setTimeout(finish, 5000);
+
+    // When the video has loaded enough to play, start playing it
+    // This way, by the time the user scrolls to Features, all videos
+    // are already playing in the background
+    video.onloadeddata = finish;
+    video.oncanplaythrough = finish;
+
     // If the video fails (e.g. file not found), don't block the app
-    video.onerror = () => resolve();
+    video.onerror = finish;
+
+    video.load();
   });
 }
 

@@ -11,7 +11,7 @@ import * as THREE from "three";
 import { useGLTF, useTexture } from "@react-three/drei";
 import type { GLTF } from "three-stdlib";
 import useMacBookStore from "../../store";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { noChangeParts } from "../../constants";
 
 type GLTFResult = GLTF & {
@@ -65,12 +65,15 @@ export default function MacbookModel14(props: React.ComponentProps<"group">) {
 
   const { color } = useMacBookStore();
 
-  const texture = useTexture("/screen.png");
+  const screenTexture = useTexture("/screen.png");
+  const texture = useMemo(() => {
+    const clonedTexture = screenTexture.clone();
+    clonedTexture.colorSpace = THREE.SRGBColorSpace;
+    clonedTexture.needsUpdate = true;
+    return clonedTexture;
+  }, [screenTexture]);
 
-  useEffect(() => {
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.needsUpdate = true;
-  }, [texture]);
+  useEffect(() => () => texture.dispose(), [texture]);
 
   useEffect(() => {
     scene.traverse((child) => {

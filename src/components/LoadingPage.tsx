@@ -2,27 +2,29 @@ import { useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { preloadAllVideos } from "../utils/videoTextureCache";
 
-const modelsToLoad = ["/models/macbook.glb", "/models/Macbook-16.glb", "/models/Macbook-14.glb"];
+const modelsToLoad = ["/models/macbook.glb", "/models/macbook-16.glb", "/models/macbook-14-transformed.glb"];
 
 const LoadingPage = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadAssets = async () => {
-      // Preload all 3D models using Drei / React Three Fiber cache
-      modelsToLoad.forEach((model) => {
-        useGLTF.preload(model);
-      });
+      try {
+        // Preload all 3D models using Drei / React Three Fiber cache
+        modelsToLoad.forEach((model) => {
+          useGLTF.preload(model);
+        });
 
-      // Preload all videos into the permanent cache
-      // Unlike the old approach, these videos stay in memory
-      // and the Macbook model reuses them instead of creating fresh ones
-      await preloadAllVideos();
-
-      // Small delay to make the loader feel smoother
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+        // Preload all videos into the permanent cache
+        // Unlike the old approach, these videos stay in memory
+        // and the Macbook model reuses them instead of creating fresh ones
+        await preloadAllVideos();
+      } finally {
+        // Small delay to make the loader feel smoother
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+      }
     };
 
     loadAssets();
