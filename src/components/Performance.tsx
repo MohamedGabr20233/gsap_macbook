@@ -102,7 +102,7 @@ const Performance = () => {
 
       <div className="wrapper">
         {performanceImages.map((item, index) => (
-          <img key={index} src={item.src} className={item.id} alt={item.id} />
+          <img key={index} src={item.src} className={item.id} alt={item.id || "Performance Image"} />
         ))}
       </div>
 
