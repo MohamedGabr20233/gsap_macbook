@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { preloadAllVideos } from "../utils/videoTextureCache";
 
-const modelsToLoad = ["/models/macbook.glb", "/models/Macbook-16.glb", "/models/Macbook-14.glb"];
-
+const modelsToLoad = [
+  "/models/macbook.glb",
+  "/models/macbook-16.glb",
+  "/models/macbook-14-transformed.glb",
+];
 const LoadingPage = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
