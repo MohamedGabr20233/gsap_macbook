@@ -1,5 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { useMediaQuery } from "react-responsive";
 
 const Showcase = () => {
@@ -45,7 +46,16 @@ const Showcase = () => {
   return (
     <section id="showcase">
       <div className="media">
-        <video src="/videos/game.mp4" loop muted autoPlay playsInline />
+        <video
+          src="/videos/game.mp4"
+          loop
+          muted
+          autoPlay
+          playsInline
+          // The pin spacer for this section is sized from the video box, so
+          // re-measure as soon as the real dimensions are known.
+          onLoadedMetadata={() => ScrollTrigger.refresh()}
+        />
         <div className="mask">
           <img src="/mask-logo.svg" />
         </div>

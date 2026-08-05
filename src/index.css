@@ -181,7 +181,10 @@ body {
       @apply relative flex justify-center lg:overflow-hidden;
 
       video {
-        @apply w-full 2xl:max-w-425 aspect-auto object-contain object-bottom;
+        /* Reserve the video's real 2880x1800 box up front. Without a fixed
+           aspect-ratio the element is 300x150 until metadata arrives, so
+           ScrollTrigger builds the pin spacer from a collapsed section. */
+        @apply w-full 2xl:max-w-425 aspect-[2880/1800] object-contain object-bottom;
       }
 
       .mask {
